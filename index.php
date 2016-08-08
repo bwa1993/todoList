@@ -14,12 +14,6 @@ $itemsQuery->execute([
 
 $items = $itemsQuery->rowCount() ? $itemsQuery : [];
 
-print_r($items);
-
-//foreach($items as $item) {
-//	echo $item['name'], '<br>';
-//}
-
 ?>
 
 <!DOCTYPE html>
@@ -39,15 +33,19 @@ print_r($items);
 		<div class="list">
 			<h1 class="header">To do.</h1>
 
+
 			<?php if(!empty($items)): ?>
 			<ul class="items">
+				<a href="clear.php" class="clear" class="items-clear" name="clear">Clear</a>
 				<?php foreach($items as $item): ?>
 					<li>
-						<span class="item"<?php echo $item['done'] ? ' done' : ' ' ?><?php echo $item['name']; ?></span>
-						<a href="#" class="done-button">Mark as done</a>
+						<span class="item<?php echo $item['done'] ? ' done' : '' ?>"><?php echo $item['name']; ?></span>
+						<?php if(!$item['done']): ?>
+							<a href="mark.php?as=done&item=<?php echo $item['id']; ?>" class="done-button">Mark as done</a>
+						<?php endif; ?>
 					</li>
 				<?php endforeach; ?>
-			</ul>
+			</ul>	
 			<?php else: ?>
 				<p>You haven't added any items yet.</p>
 			<?php endif; ?>

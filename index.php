@@ -2,7 +2,7 @@
 
 require_once 'init.php';
 
-$itemsQuery = $db->prepare("
+ $itemsQuery = $db->prepare("
 	SELECT id, name, done
 	FROM items
 	WHERE user = :user
@@ -12,7 +12,7 @@ $itemsQuery->execute([
 	'user' => $_SESSION['user_id']
 ]);
 
-$items = $itemsQuery->rowCount() ? $itemsQuery : [];
+$items = $itemsQuery->rowCount() ? $itemsQuery : []; 
 
 ?>
 
